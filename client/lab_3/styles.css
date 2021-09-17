@@ -49,10 +49,6 @@
     justify-content: space-between;
     align-items: center;
   }
-  .groupproject {
-    display: flex;
-    flex-flow: column flex-end;
-  }
 
   .photo-grid-container {
     display: flex;
