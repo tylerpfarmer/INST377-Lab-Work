@@ -3,6 +3,14 @@
     padding: 0;
     box-sizing: border-box;
   }
+
+  .title{
+    background-color: rgba(0,139, 139,0.8);
+    padding: 10px 15px;
+    margin: 0;
+    display:flex;
+    justify-content: flex-start;
+  }
   
   .menu-container {
     color: #fff;
@@ -19,11 +27,11 @@
     justify-content: space-between;
   }
   
-  .login {
+  .mainpage {
     margin-left: 20px;
   }
 
-  .signup {
+  .databasedemos {
     margin-left: auto;
   }
 
@@ -40,6 +48,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  .groupproject {
+    display: flex;
+    flex-flow: column flex-end;
   }
 
   .photo-grid-container {
