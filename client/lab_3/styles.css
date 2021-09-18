@@ -56,7 +56,7 @@
   }
   
   .photo-grid {
-    width: 900px;
+    width: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -71,11 +71,11 @@
   }
 
   .first-item {
-    order: 1;
+    order: -1;
   }
   
   .last-item {
-    order: -1;
+    order: 1;
   }
 
   .footer {
