@@ -95,6 +95,7 @@ width: 300px;
   display: block;
 }
 
+
 .photo-grid-container .carousel .carousel_actions {
   display: flex;
   width: 100%;
@@ -102,14 +103,4 @@ width: 300px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-}
-.photo-grid-container .carousel .carousel_actions button {
-  border-radius: 50px;
-  border: 0;
-  font-weight: bold;
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-}
-
-
+} 
