@@ -1,9 +1,19 @@
-async function windowActions() {
+async function mainThread() {
   const endpoint = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json';
-
   const request = await fetch(endpoint);
-
   const restaurants = await request.json();
+  const mymap = L.map('mapid').setView([51.505, -0.09], 13);
+  const accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+
+  // Map
+  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'your.mapbox.access.token'
+}).addTo(mymap);
 
   function findMatches(wordToMatch, restauraunts) {
     return restaurants.filter((place) => {
@@ -42,4 +52,4 @@ async function windowActions() {
     displayMatches(evt);
   });
 }
-window.onload = windowActions();
+window.onload = mainThread();
