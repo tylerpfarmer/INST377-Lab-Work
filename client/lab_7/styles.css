@@ -1,3 +1,16 @@
+.columns {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .wrapper {
+    display: flex;
+  }
+  .container {
+    max-width: 960px;
+    margin-top: 25px;
+  }
+
 .search-form {
     display: inline;
 }

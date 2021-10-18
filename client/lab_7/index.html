@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin=""/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="styles.css"/>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
@@ -13,18 +14,28 @@
     crossorigin=""></script>
     
     <head>
+      <div class='title is-1'>
         <h1>Tyler Farmer Lab 7: JSON to Map Markers</h1>
+      </div>
     </head>
     <body>
-      <form class='search-form'>
-          <input type='text' class='search' placeholder="Search by Zip">
-          <ul class='suggestions'>
-            <li>Search for restaurants by zip code</li>
-          </ul>
-      </form>
-      <div class='mapColumn'>
-        <div id="mapid"></div>
+      <div class='wrapper'>
+        <div class='container'>
+          <div class='columns'>
+            <div class='column'>
+              <form class='search-form'>
+                <input type='text' class='search' placeholder="Search by Zip">
+                <ul class='suggestions'>
+                  <li>Search for restaurants by zip code</li>
+                </ul>
+              </form>
+            </div>
+            <div class='column'>
+              <div id="mapid"></div>
+            </div>
+          </div>
+        </div>
       </div>
-        <script src='script.js'></script>
+      <script src='script.js'></script>
     </body>
 </html>
