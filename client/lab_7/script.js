@@ -2,24 +2,26 @@ async function mainThread() {
   const endpoint = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json';
   const request = await fetch(endpoint);
   const restaurants = await request.json();
-  const mymap = L.map('mapid').setView([51.505, -0.09], 13);
-  const accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+  // marker array
+  const markers = [];
 
   // Map
-  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+  const accessToken = 'pk.eyJ1IjoidHlsZXJwZmFybWVyIiwiYSI6ImNrdXZuem41NjFuanIybm9kODFwOGdkcXkifQ.a6scWSSqAyYImncizXgGzQ';
+  const mymap = L.map('mapid').setView([38.989, -76.93], 12);
+  L.tileLayer(`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${accessToken}`, {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox/streets-v11',
     tileSize: 512,
     zoomOffset: -1,
-    accessToken: 'your.mapbox.access.token'
-}).addTo(mymap);
+    accessToken: 'pk.eyJ1IjoidHlsZXJwZmFybWVyIiwiYSI6ImNrdXZuem41NjFuanIybm9kODFwOGdkcXkifQ.a6scWSSqAyYImncizXgGzQ'
+  }).addTo(mymap);
 
   function findMatches(wordToMatch, restauraunts) {
     return restaurants.filter((place) => {
-      // if name or zip code matches search
+      // if zip code matches search
       const regex = new RegExp(wordToMatch, 'gi');
-      return place.name.match(regex) || place.zip.match(regex);
+      return place.zip.match(regex);
     });
   }
 
@@ -27,8 +29,21 @@ async function mainThread() {
   const suggestions = document.querySelector('.suggestions');
 
   function displayMatches(event) {
+    markers.forEach((marker) => {
+      marker.remove();
+    });
     const matchArray = findMatches(event.target.value, restaurants);
-    const html = matchArray.map((place) => {
+    newMatchArray = matchArray.slice(0,5);
+    newMatchArray.forEach(place => {
+      if(place.hasOwnProperty('geocoded_column_1')) {
+        const point = place.geocoded_column_1;
+        const latLong = point.coordinates;
+        const marker = latLong.reverse();
+        markers.push(L.marker(marker).addTo(mymap));
+      }
+    })
+    // where would I be without the class Discord 0_0
+    const html = newMatchArray.map((place) => {
       const regex = new RegExp(event.target.value, 'gi');
       const restaurantName = place.name.replace(regex, `<span class="h1">${event.target.value}</span>`);
       const zipCode = place.zip.replace(regex, `<span class="h1">${event.target.value}</span>`);
@@ -47,7 +62,7 @@ async function mainThread() {
     suggestions.innerHTML = html;
   }
 
-  searchInput.addEventListener('change', displayMatches);
+  searchInput.addEventListener('input', displayMatches);
   searchInput.addEventListener('keyup', (evt) => {
     displayMatches(evt);
   });
